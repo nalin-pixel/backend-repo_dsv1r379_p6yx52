@@ -41,6 +41,19 @@ class Product(BaseModel):
 # Add your own schemas here:
 # --------------------------------------------------
 
+class Child(BaseModel):
+    """Children profile to identify who is sharing"""
+    name: str = Field(..., description="Child name")
+
+class Checkin(BaseModel):
+    """Location check-in shared by a child, optionally with a link"""
+    child_id: str = Field(..., description="ID of the child profile")
+    lat: float = Field(..., description="Latitude")
+    lng: float = Field(..., description="Longitude")
+    accuracy: Optional[float] = Field(None, description="GPS accuracy in meters")
+    note: Optional[str] = Field(None, description="Optional note")
+    link: Optional[str] = Field(None, description="Optional link child chose to share (e.g., video URL)")
+
 # Note: The Flames database viewer will automatically:
 # 1. Read these schemas from GET /schema endpoint
 # 2. Use them for document validation when creating/editing
